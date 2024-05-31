@@ -2,15 +2,64 @@
 {% load static %}
 {% block title %}TECH BLOG{% endblock title %}
 {% block content %}
-<div class="col-sm-10">
-    <h1 class="text-center alert alert-primary">TECH BLOG HOME PAGE</h1>
+<style>
+    * {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-weight: bold;
+        font-size: 24px;
+        color: #ff6f00; 
+    }
+
+    .card-text {
+        color: #555;
+    }
+    .alert-primary {
+        background-color: #ff4081; 
+        color: #fff;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center alert alert-primary" style="font-size: 36px; background-color: #4a8dcc99; padding: 20px;">TECH BLOG HOME PAGE</h1>
     {% for blog in blogs %}
-    <div class= "jumbotron jumbotron-fluid jumbo-color">
-        <div class="container">
-            <h2 class="display-3 font-weight-bold">{{ blog.title }}</h2>
-            <p class="lead text-dark">{{ blog.cont }}</p>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title">{{ blog.title }}</h2>
+            <p class="card-text">{{ blog.cont }}</p>
         </div>
     </div>
     {% endfor %}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title">Second Blog Title</h2>
+            <p class="card-text">Content of the second blog.</p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title">Third Blog Title</h2>
+            <p class="card-text">Content of the third blog.</p>
+        </div>
+    </div>
 </div>
-{% endblock content %}
+{% endblock content %}</div>
