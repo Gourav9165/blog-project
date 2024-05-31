@@ -1,27 +1,120 @@
 {% extends 'blog/base.html' %}
 {% load static %}
-{% block title%}SIGNUP{% endblock title %}
-{% block content %}
+{% block title %} SIGNUP {% endblock title %}
+{% block styles %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+    }
 
-    <div class = "col-sm-10">
-        <h2 class="text-dark text-center">Sign Up</h2>
-        {% if messages %}
-        {% for message in messages %}
-        <p {% if message.tags %}{% endif %} class="alert alert-primary text-center">{{message}}</p>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .text-danger {
+        font-size: 0.8rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeInUp {
+        animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .animate-pulse {
+        animation: pulse 1.5s infinite;
+    }
+
+    .alert {
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .alert-primary {
+        background-color: #cce5ff;
+        border-color: #b8daff;
+        color: #004085;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .my-4 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock styles %}
+{% block content %}
+<div class="col-sm-10">
+    <h2 class="text-dark text-center mb-4">Sign Up</h2>
+    {% if messages %}
+    {% for message in messages %}
+    <p {% if message.tags %}{% endif %} class="alert alert-primary text-center">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    <form id="signupForm" action="" method="POST" novalidate>
+        {% csrf_token %}
+        {% for fm in form %}
+        <div class="form-group">
+            {{ fm.label_tag }} {{ fm }} <small class="text-danger">{{ fm.errors|striptags }}</small>
+        </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" />
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-4">{{ error }}</p>
         {% endfor %}
         {% endif %}
-        <form action = "" method = "POST" novalidate>
-            {% csrf_token %}
-            {% for fm in form %}
-                <div class="form-group">
-                    {{ fm.label_tag }} {{ fm }} <small class="text-danger">{{ fm.errors|striptags }}</small>
-                </div>
-            {% endfor %}
-            <input type = "submit" class = "btn btn-primary"/>
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <p class="alert alert-danger my-4">{{error}}</p>
-                {% endfor %}
-            {% endif %}
-    </div>
+    </form>
+</div>
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock scripts %}
