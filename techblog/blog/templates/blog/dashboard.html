@@ -41,15 +41,15 @@
                 <tbody>
                     {% for blg in blogs %}
                         <tr>
-                            <th scope = "row">{{ blg.id }}</th>
+                            <th scope="row">{{ blg.id }}</th>
                             <td>{{ blg.title }}</td>
                             <td>{{ blg.cont }}</td>
-                            <td><a href="{% url 'updateblog' blg.id %}" class="btn btn-warning btn-sm">Edit</a>
-                                {% if perms.blog.delete_blog %}
-                                <form action='{% url "deleteblog" blg.id %}' method="post" class="d-inline"> {% csrf_token %}
-                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
-                               </form>
-                               {% endif %}
+                            <td>
+                                <a href="{% url 'updateblog' blg.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{% url 'deleteblog' blg.id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                </form>
                             </td>
                         </tr>
                     {% endfor %}
