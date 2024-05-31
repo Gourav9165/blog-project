@@ -81,14 +81,16 @@ def update_blog(request,id):
     else:
         return HttpResponseRedirect('/login/')
 
-def delete_blog(request,id):
+def delete_blog(request, id):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            pi = Blog.objects.get(pk=id)
-            pi.delete()
+            blog = Blog.objects.get(pk=id)
+            blog.delete()
+            messages.success(request, "Blog deleted successfully.")
             return HttpResponseRedirect('/dashboard/')
     else:
         return HttpResponseRedirect('/login/')
+
 
 def about(request):
     return render(request, 'blog/about.html')
